@@ -8,7 +8,6 @@
 
 <h1>Práctica de PHP</h1>
 
-<!-- Ejercicio 1: Validación de Variables -->
 <h2>Ejercicio 1: Validación de Variables</h2>
 <?php
 // Variables para validar
@@ -27,7 +26,6 @@ foreach ($valid_vars as $var => $status) {
 }
 ?>
 
-<!-- Ejercicio 2: Mostrar Valores de Variables -->
 <h2>Ejercicio 2: Mostrar Valores de Variables</h2>
 <?php
 $a = "ManejadorSQL";
@@ -47,27 +45,8 @@ echo "<p>\$b: $b</p>";
 echo "<p>\$c: $c</p>";
 ?>
 
-<!-- Ejercicio 3: Mostrar Valores y Tipos de Variables -->
-<h2>Ejercicio 3: Mostrar Valores y Tipos de Variables</h2>
-<?php
-$a = "PHP5";
-$z[] = &$a;
-$b = "5a version de PHP";
-$c = $b * 10;
-$a .= $b;
-$b *= $c;
-$z[0] = "MySQL";
 
-echo "<p>\$a: $a</p>";
-echo "<p>\$b: $b</p>";
-echo "<p>\$c: $c</p>";
-echo "<p>\$z[0]: $z[0]</p>";
-echo "<pre>";
-print_r($z);
-echo "</pre>";
-?>
 
-<!-- Ejercicio 4: Uso de $GLOBALS -->
 <h2>Ejercicio 4: Uso de \$GLOBALS</h2>
 <?php
 $a = "PHP5";
@@ -87,7 +66,6 @@ print_r($GLOBALS['z']);
 echo "</pre>";
 ?>
 
-<!-- Ejercicio 5: Valores de Variables con Conversión de Tipos -->
 <h2>Ejercicio 5: Valores de Variables con Conversión de Tipos</h2>
 <?php
 $a = "7 personas";
@@ -100,7 +78,6 @@ echo "<p>\$b: $b</p>";
 echo "<p>\$c: $c</p>";
 ?>
 
-<!-- Ejercicio 6: Valores Booleanos -->
 <h2>Ejercicio 6: Valores Booleanos</h2>
 <?php
 $a = "0";
@@ -138,17 +115,13 @@ echo "<p>\$c: " . ($c ? 'true' : 'false') . "</p>";
 echo "<p>\$e: " . ($e ? 'true' : 'false') . "</p>";
 ?>
 
-<!-- Ejercicio 7: Información del Servidor y del Navegador -->
 <h2>Ejercicio 7: Información del Servidor y del Navegador</h2>
 <?php
-// Información del servidor
 echo "<p><strong>Versión de Apache:</strong> " . (isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : 'No disponible') . "</p>";
 echo "<p><strong>Versión de PHP:</strong> " . phpversion() . "</p>";
 
-// Información del sistema operativo del servidor
 echo "<p><strong>Sistema Operativo del Servidor:</strong> Información no disponible directamente.</p>";
 
-// Información del idioma del navegador
 echo "<p><strong>Idioma del Navegador:</strong> " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'No disponible') . "</p>";
 ?>
 
