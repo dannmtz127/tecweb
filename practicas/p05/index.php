@@ -64,19 +64,26 @@ print_r($z);
 echo "</pre>";
 ?>
 
-
-
-<h2>Ejercicio 5: Valores de Variables con Conversión de Tipos</h2>
+<h2>Ejercicio 4: Uso de \$GLOBALS</h2>
 <?php
-$a = "7 personas";
-$b = (integer) $a;
-$a = "9E3";
-$c = (double) $a;
+$a = "PHP5";
+$z[] = &$a;
+$b = "5a version de PHP";
+$c = $b * 10;
+$a .= $b;
+$b *= $c;
+$z[0] = "MySQL";
 
-echo "<p>\$a: $a</p>";
-echo "<p>\$b: $b</p>";
-echo "<p>\$c: $c</p>";
+echo "<p>\$a: " . $GLOBALS['a'] . "</p>";
+echo "<p>\$b: " . $GLOBALS['b'] . "</p>";
+echo "<p>\$c: " . $GLOBALS['c'] . "</p>";
+echo "<p>\$z[0]: " . $GLOBALS['z'][0] . "</p>";
+echo "<pre>";
+print_r($GLOBALS['z']);
+echo "</pre>";
 ?>
+
+
 
 <h2>Ejercicio 6: Valores Booleanos</h2>
 <?php
