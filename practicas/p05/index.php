@@ -45,9 +45,7 @@ echo "<p>\$b: $b</p>";
 echo "<p>\$c: $c</p>";
 ?>
 
-
-
-<h2>Ejercicio 4: Uso de \$GLOBALS</h2>
+<h2>Ejercicio 3: Mostrar Valores y Tipos de Variables</h2>
 <?php
 $a = "PHP5";
 $z[] = &$a;
@@ -57,14 +55,16 @@ $a .= $b;
 $b *= $c;
 $z[0] = "MySQL";
 
-echo "<p>\$a: " . $GLOBALS['a'] . "</p>";
-echo "<p>\$b: " . $GLOBALS['b'] . "</p>";
-echo "<p>\$c: " . $GLOBALS['c'] . "</p>";
-echo "<p>\$z[0]: " . $GLOBALS['z'][0] . "</p>";
+echo "<p>\$a: $a</p>";
+echo "<p>\$b: $b</p>";
+echo "<p>\$c: $c</p>";
+echo "<p>\$z[0]: $z[0]</p>";
 echo "<pre>";
-print_r($GLOBALS['z']);
+print_r($z);
 echo "</pre>";
 ?>
+
+
 
 <h2>Ejercicio 5: Valores de Variables con Conversión de Tipos</h2>
 <?php
