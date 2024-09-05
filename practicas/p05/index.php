@@ -95,7 +95,12 @@ echo "<p>\$b: $b</p>";
 echo "<p>\$c: $c</p>";
 ?>
 
-<$b);
+<h2>Ejercicio 6: Valores Booleanos</h2>
+<?php
+$a = "0";
+$b = "TRUE";
+$c = FALSE;
+$d = ($a OR $b);
 $e = ($a AND $c);
 $f = ($a XOR $b);
 
