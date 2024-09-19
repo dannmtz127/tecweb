@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Vehículo</title>
+</head>
+<body>
+    <h2>Consulta de Vehículo</h2>
+    <p>Ingrese la matrícula del vehículo para consultar:</p>
+    <form action="consultar_auto.php" method="post">
+        Matrícula: <input type="text" name="matricula" pattern="[A-Z]{3}[0-9]{4}" required><br>
+        <input type="submit" value="Consultar">
+    </form>
+</body>
+</html>

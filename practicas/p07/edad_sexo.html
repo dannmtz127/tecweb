@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Edad y Sexo</title>
+</head>
+<body>
+    <h2>Ejercicio 5</h2>
+    <p>Ingrese su edad y sexo:</p>
+    <form action="procesar_info.php" method="post">
+        Edad: <input type="number" name="edad" required><br>
+        Sexo: 
+        <select name="sexo" required>
+            <option value="femenino">Femenino</option>
+            <option value="masculino">Masculino</option>
+        </select><br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
