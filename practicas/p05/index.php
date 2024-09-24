@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Práctica de PHP</title>
 </head>
 <body>
@@ -9,6 +9,7 @@
 <h1>Práctica de PHP</h1>
 
 <h2>Ejercicio 1: Validación de Variables</h2>
+<!-- 
 <?php
 // Variables para validar
 $valid_vars = [
@@ -31,14 +32,17 @@ foreach ($valid_vars as $var => $status) {
 $a = "ManejadorSQL";
 $b = 'MySQL';
 $c = &$a;
-
+?>
+<?php
 echo "<p>\$a: $a</p>";
 echo "<p>\$b: $b</p>";
 echo "<p>\$c: $c</p>";
-
+?>
+<?php
 $a = "PHP server";
 $b = &$a;
-
+?>
+<?php
 echo "<p>Después de asignaciones:</p>";
 echo "<p>\$a: $a</p>";
 echo "<p>\$b: $b</p>";
@@ -73,7 +77,8 @@ $c = $b*10;
 $a .= $b;
 $b *= $c;
 $z[0] = "MySQL";
-
+?>
+<?php
 echo "<p>\$a: " . $GLOBALS['a'] . "</p>";
 echo "<p>\$b: " . $GLOBALS['b'] . "</p>";
 echo "<p>\$c: " . $GLOBALS['c'] . "</p>";
@@ -103,31 +108,38 @@ $c = FALSE;
 $d = ($a OR $b);
 $e = ($a AND $c);
 $f = ($a XOR $b);
-
+?>
+<?php
 echo "<p>\$a: ";
 var_dump($a);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$b: ";
 var_dump($b);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$c: ";
 var_dump($c);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$d: ";
 var_dump($d);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$e: ";
 var_dump($e);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$f: ";
 var_dump($f);
 echo "</p>";
-
+?>
+<?php
 echo "<p>\$c: " . ($c ? 'true' : 'false') . "</p>";
 echo "<p>\$e: " . ($e ? 'true' : 'false') . "</p>";
 ?>
@@ -141,6 +153,6 @@ echo "<p><strong>Sistema Operativo del Servidor:</strong> Información no dispon
 
 echo "<p><strong>Idioma del Navegador:</strong> " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'No disponible') . "</p>";
 ?>
-
+-->
 </body>
 </html>
