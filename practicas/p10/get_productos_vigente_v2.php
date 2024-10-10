@@ -1,39 +1,59 @@
 <?php
 // Conexión a la base de datos
-$link = mysqli_connect("localhost", "root", "123456789a", "marketzone");
+$servername = "localhost";
+$username = "root";
+$password = "123456789a";
+$dbname = "marketzone";
 
-if ($link === false) {
-    die("ERROR: No pudo conectarse. " . mysqli_connect_error());
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Chequear conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Consulta para obtener productos vigentes (puedes cambiar la condición según tus necesidades)
-$sql = "SELECT * FROM productos WHERE unidades > 0";
-$result = mysqli_query($link, $sql);
+// Consulta para obtener todos los productos
+$sql = "SELECT id, nombre, marca, modelo, precio, detalles, unidades, imagen FROM productos";
+$result = $conn->query($sql);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    echo "<table border='1'>";
-    echo "<tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Modelo</th><th>Precio</th><th>Unidades</th><th>Editar</th></tr>";
-
-    // Ciclo para recorrer los productos
-    while ($producto = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        echo "<td>" . $producto['id'] . "</td>";
-        echo "<td>" . $producto['nombre'] . "</td>";
-        echo "<td>" . $producto['marca'] . "</td>";
-        echo "<td>" . $producto['modelo'] . "</td>";
-        echo "<td>" . $producto['precio'] . "</td>";
-        echo "<td>" . $producto['unidades'] . "</td>";
-        
-        // Enlace para editar el producto
-        echo "<td><a href='formulario_productos_v2.php?id=" . $producto['id'] . "'>Editar</a></td>";
-        echo "</tr>";
+if ($result->num_rows > 0) {
+    echo "<table border='1' style='border-collapse: collapse; width: 100%; text-align: center;'>";
+    echo "<tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Precio</th>
+            <th>Detalles</th>
+            <th>Unidades</th>
+            <th>Imagen</th>
+            <th>Editar</th>
+        </tr>";
+    
+    // Imagen por defecto
+    $default_image = "LogoLEGO.png"; // Aquí colocas la ruta a tu imagen por defecto
+    
+    // Mostrar productos
+    while ($row = $result->fetch_assoc()) {
+        $imagen = !empty($row['imagen']) ? $row['imagen'] : $default_image; // Si no hay imagen, usar la por defecto
+        echo "<tr>
+                <td>{$row['id']}</td>
+                <td>{$row['nombre']}</td>
+                <td>{$row['marca']}</td>
+                <td>{$row['modelo']}</td>
+                <td>{$row['precio']}</td>
+                <td>{$row['detalles']}</td>
+                <td>{$row['unidades']}</td>
+                <td><img src='{$imagen}' alt='Imagen del producto' width='100'></td>
+                <td><a href='formulario_productos_v2.php?id={$row['id']}'>Editar</a></td>
+              </tr>";
     }
-
     echo "</table>";
 } else {
-    echo "No se encontraron productos vigentes.";
+    echo "No se encontraron productos.";
 }
 
 // Cerrar conexión
-mysqli_close($link);
+$conn->close();
 ?>
