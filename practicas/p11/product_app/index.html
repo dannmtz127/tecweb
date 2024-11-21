@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Mis productos</title>
+    <title>Product_App</title>
   </head>
   <body onload="init()">
 
     <!-- BARRA DE NAVEGACIÓN  -->
     <nav>
-      <a href="#">Produtos</a>
+      <a href="#">Product App</a>
       
         <ul></ul>
         <form>
-          <input name="search" id="search" type="search" placeholder="Nombre o detalles">
-          <button type="submit" onclick="buscarProducto(event)">Buscar</button>
+          <input name="search" id="search" type="search" placeholder="ID/Nombre/Marca/Detalles" list="idProductos" onkeyup="llenarLista(event)">
+          <button type="submit" onclick="buscarID(event)">Buscar</button> <br>
+          <datalist id="idProductos"></datalist>
+          <!--<ul id = "opciones"></ul>-->
         </form>
     </nav>
 
@@ -22,7 +24,7 @@
         <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
         <form id="task-form">
           <div>
-            <input type="text" id="name" placeholder="Nombre de producto">
+            <input type="text" id="name" placeholder="Nombre">
           </div>
           <div>
             <textarea id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
@@ -37,6 +39,7 @@
       <!-- TABLA  -->
       <div>
         <ul></ul>
+
         <table>
           <thead>
             <tr>
