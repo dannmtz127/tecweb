@@ -172,10 +172,10 @@ function agregarProducto(e) {
             }
         };
         client.send(productoJsonString);
-        window.alert("[CLIENTE]: Los datos son validos :D");
+        window.alert("Los datos son validos");
     }
     else
-        window.alert("[CLIENTE]: Los datos dados son invalidos, intentelo de nuevo");
+        window.alert("Los datos dados son invalidos, intentelo de nuevo");
 }
 
 // SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR
