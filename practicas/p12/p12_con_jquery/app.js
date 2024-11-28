@@ -1,82 +1,114 @@
-// Declaración de la variable baseJSON
-const baseJSON = [
-    { id: 1, name: "Producto A", description: "Descripción del producto A" },
-    { id: 2, name: "Producto B", description: "Descripción del producto B" },
-    { id: 3, name: "Producto C", description: "Descripción del producto C" }
+// Variable baseJSON que contiene los productos
+let baseJSON = [
+    { id: 1, name: "Producto 1", description: "Descripción del Producto 1", deleted: false },
+    { id: 2, name: "Producto 2", description: "Descripción del Producto 2", deleted: false },
+    { id: 3, name: "Producto 3", description: "Descripción del Producto 3", deleted: true },
+    { id: 4, name: "Producto 4", description: "Descripción del Producto 4", deleted: false }
   ];
   
-  // Función init(): Carga el JSON inicial en el textarea
+  // Función para inicializar la página
   function init() {
-    $('#description').val(JSON.stringify(baseJSON, null, 2));
+    cargarProductos();
   }
   
-  // Función para agregar productos al JSON
-  $(document).on('submit', '#product-form', function (e) {
+  // Cargar toda la lista de productos no eliminados
+  function cargarProductos() {
+    const productosNoEliminados = baseJSON.filter(producto => !producto.deleted);
+    
+    // Llenar la tabla de productos
+    const $productsTable = $("#products");
+    $productsTable.empty();
+    productosNoEliminados.forEach(producto => {
+      $productsTable.append(`
+        <tr>
+          <td>${producto.id}</td>
+          <td>${producto.name}</td>
+          <td>${producto.description}</td>
+        </tr>
+      `);
+    });
+  
+    // Actualizar la barra de estado con los nombres de los productos
+    const $statusBar = $("#container");
+    $statusBar.empty();
+    productosNoEliminados.forEach(producto => {
+      $statusBar.append(`<li>${producto.name}</li>`);
+    });
+  
+    // Mostrar la barra de estado si no está visible
+    $("#product-result").removeClass("d-none");
+  }
+  
+  // Buscar productos en tiempo real
+  $("#search").on("keyup", function () {
+    const query = $(this).val().toLowerCase();
+    const productosFiltrados = baseJSON.filter(
+      producto => !producto.deleted &&
+        (producto.name.toLowerCase().includes(query) || 
+         producto.description.toLowerCase().includes(query))
+    );
+  
+    // Actualizar la tabla
+    const $productsTable = $("#products");
+    $productsTable.empty();
+    productosFiltrados.forEach(producto => {
+      $productsTable.append(`
+        <tr>
+          <td>${producto.id}</td>
+          <td>${producto.name}</td>
+          <td>${producto.description}</td>
+        </tr>
+      `);
+    });
+  
+    // Actualizar la barra de estado
+    const $statusBar = $("#container");
+    $statusBar.empty();
+    productosFiltrados.forEach(producto => {
+      $statusBar.append(`<li>${producto.name}</li>`);
+    });
+  });
+  
+  // Agregar un nuevo producto
+  $("#product-form").on("submit", function (e) {
     e.preventDefault();
-    const name = $('#name').val().trim();
-    const description = $('#description').val().trim();
+  
+    const name = $("#name").val();
+    const description = $("#description").val();
   
     if (!name || !description) {
       alert("Por favor, completa todos los campos.");
       return;
     }
   
-    const newProduct = {
-      id: baseJSON.length + 1,
-      name: name,
-      description: description
-    };
+    // Simular ID único
+    const newId = baseJSON.length ? baseJSON[baseJSON.length - 1].id + 1 : 1;
   
-    baseJSON.push(newProduct);
+    // Agregar producto a baseJSON
+    baseJSON.push({ id: newId, name, description, deleted: false });
   
-    // Actualiza el JSON en el textarea y la tabla
-    $('#description').val(JSON.stringify(baseJSON, null, 2));
-    renderProducts();
-    $('#product-form').trigger('reset');
+    // Mostrar mensaje de éxito
+    alert("Producto agregado exitosamente.");
+  
+    // Limpiar formulario
+    $("#name").val("");
+    $("#description").val("");
+  
+    // Recargar lista de productos
+    cargarProductos();
   });
   
-  // Función para buscar productos por ID, marca o descripción
-  $(document).on('submit', '.form-inline', function (e) {
-    e.preventDefault();
-    const searchTerm = $('#search').val().trim().toLowerCase();
+  // Función para eliminar un producto (simulado por ID)
+  function eliminarProducto(id) {
+    const producto = baseJSON.find(p => p.id === id);
+    if (producto) {
+      producto.deleted = true;
+      alert(`Producto con ID ${id} eliminado.`);
   
-    if (!searchTerm) {
-      alert("Por favor, introduce un término de búsqueda.");
-      return;
-    }
-  
-    const results = baseJSON.filter(product => 
-      product.id.toString().includes(searchTerm) || 
-      product.name.toLowerCase().includes(searchTerm) || 
-      product.description.toLowerCase().includes(searchTerm)
-    );
-  
-    if (results.length === 0) {
-      alert("No se encontraron productos que coincidan con la búsqueda.");
+      // Recargar lista de productos
+      cargarProductos();
     } else {
-      renderProducts(results);
+      alert("Producto no encontrado.");
     }
-  });
-  
-  // Renderiza los productos en la tabla
-  function renderProducts(products = baseJSON) {
-    const $productsTable = $('#products');
-    $productsTable.empty();
-  
-    products.forEach(product => {
-      $productsTable.append(`
-        <tr>
-          <td>${product.id}</td>
-          <td>${product.name}</td>
-          <td>${product.description}</td>
-        </tr>
-      `);
-    });
   }
-  
-  // Inicializa la aplicación
-  $(document).ready(function () {
-    init();
-    renderProducts();
-  });
   
