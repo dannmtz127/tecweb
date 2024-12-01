@@ -44,56 +44,46 @@ function init() {
         }
     })
 
-    $('#product-form').submit(function(e){
-        // Evitamos que se recarge la pagina
+    $('#product-form').submit(function (e) {
         e.preventDefault();
-        var productoJsonString = document.getElementById('description').value;
-        var finalJSON = JSON.parse(productoJsonString);
-        finalJSON['nombre'] = document.getElementById('name').value;
-        finalJSON['id'] = document.getElementById('productId').value
+        // Capturar los valores de los campos del formulario
+        var finalJSON = {
+            nombre: $('#name').val(),
+            precio: parseFloat($('#precio').val()),
+            unidades: parseInt($('#unidades').val()),
+            modelo: $('#modelo').val(),
+            marca: $('#marca').val(),
+            detalles: $('#detalles').val(),
+            imagen: $('#imagen').val(),
+            id: $('#productId').val(),
+        };
+    
         let comp = validaciones(finalJSON);
-        if(comp != 0){
-            if(comp == 2)
-                finalJSON['imagen']= "img/default.jpg";
-            productoJsonString = JSON.stringify(finalJSON,null,2);
-            //console.log(finalJSON);
+        if (comp != 0) {
+            if (comp == 2) finalJSON['imagen'] = "img/default.jpg";
+    
             const postData = {
-                obj: productoJsonString
+                obj: JSON.stringify(finalJSON, null, 2),
             };
-
+    
             let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
-
-            $.post(url, postData, function(response){
+    
+            $.post(url, postData, function (response) {
                 $('#product-form').trigger('reset');
-                //console.log(response);
-                baseJSON = {
-                    "precio": 0.0,
-                    "unidades": 1,
-                    "modelo": "XX-000",
-                    "marca": "NA",
-                    "detalles": "NA",
-                    "imagen": "img/default.png"
-                };
-                JsonString = JSON.stringify(baseJSON,null,2);
-                document.getElementById("description").value = JsonString;
-                //console.log(response);
-                let respuesta = JSON.parse(response);
-                // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
-                let template_bar = '';
-                template_bar += `
-                            <li style="list-style: none;">status: ${respuesta.status}</li>
-                            <li style="list-style: none;">message: ${respuesta.message}</li>
-                        `;
-
-                // SE HACE VISIBLE LA BARRA DE ESTADO
-                document.getElementById("product-result").className = "card my-4 d-block";
-                // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
-                document.getElementById("container").innerHTML = template_bar;
                 listarProductos();
+    
+                // Actualizar la barra de estado
+                let respuesta = JSON.parse(response);
+                let template_bar = `
+                    <li style="list-style: none;">status: ${respuesta.status}</li>
+                    <li style="list-style: none;">message: ${respuesta.message}</li>
+                `;
+                $('#product-result').removeClass('d-none').addClass('d-block');
+                $('#container').html(template_bar);
             });
+        } else {
+            alert("[CLIENTE]: Los datos dados son invalidos, intentelo de nuevo");
         }
-        else
-            window.alert("[CLIENTE]: Los datos dados son invalidos, intentelo de nuevo");
     });
 
     $(document).on('click', '.product-delete', function(){
