@@ -7,9 +7,9 @@
         public function __construct($user, $pass, $db) {
             $this->conexion = @mysqli_connect(
                 'localhost',
-                $user,
-                $pass,
-                $db
+                'root',
+                '123456789a',
+                'marketzone'
             );
             $this->data = array();
             # Esto es para validar que si se realice la conexión
